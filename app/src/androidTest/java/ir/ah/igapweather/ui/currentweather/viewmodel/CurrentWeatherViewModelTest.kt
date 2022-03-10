@@ -87,11 +87,11 @@ class CurrentWeatherViewModelTest{
     }
     @Test
     fun getNextWeatherTest() = runBlocking {
-        getWeatherEnqueueSuccessResponse()
+        getForecastEnqueueSuccessResponse()
         currentWeatherViewModel.getNextWeather()
         val resource = currentWeatherViewModel.nextWeatherForecast.take(2).toList()
         assertThat(resource[0] is Resource.Loading).isTrue()
-        assertThat(resource[1].success).isEqualTo(getWeatherResponse())
+        assertThat(resource[1].success).isEqualTo(getForecastResponse())
     }
 
     @Test

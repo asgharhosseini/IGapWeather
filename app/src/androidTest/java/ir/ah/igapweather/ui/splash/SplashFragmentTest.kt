@@ -16,6 +16,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import javax.inject.Inject
 
 @HiltAndroidTest
 class SplashFragmentTest {
@@ -28,6 +29,7 @@ class SplashFragmentTest {
 
 
 
+    @Inject
     lateinit var mainCoroutineDispatcher: CoroutineDispatcher
 
 
@@ -38,7 +40,7 @@ class SplashFragmentTest {
     @Before
     fun setup() {
         hiltRule.inject()
-        mainCoroutineDispatcher
+
         splashViewModel = SplashViewModel(mainCoroutineDispatcher)
 
     }

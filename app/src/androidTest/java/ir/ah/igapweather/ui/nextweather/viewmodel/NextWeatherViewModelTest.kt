@@ -49,7 +49,7 @@ class NextWeatherViewModelTest{
     lateinit var mainCoroutineDispatcher: CoroutineDispatcher
 
     private lateinit var nextWeatherViewModel: NextWeatherViewModel
-    private val weatherJsonAdapter get() = moshi.adapter(WeatherResponse::class.java)
+    private val weatherJsonAdapter get() = moshi.adapter(ForecastResponse::class.java)
 
     @Before
     fun setUp() {
@@ -67,10 +67,9 @@ class NextWeatherViewModelTest{
         mockWebServer.start(port = 57594)
         mockWebServer.enqueue(
             MockResponse().setResponseCode(200)
-                .setBody(weatherJsonAdapter.toJson(getWeatherResponse()))
+                .setBody(weatherJsonAdapter.toJson(getForecastResponse()))
         )
     }
-
 
 
 
@@ -80,7 +79,7 @@ class NextWeatherViewModelTest{
         nextWeatherViewModel.getNextWeather()
         val resource = nextWeatherViewModel.nextWeatherForecast.take(2).toList()
         assertThat(resource[0] is Resource.Loading).isTrue()
-        assertThat(resource[1].success).isEqualTo(getWeatherResponse())
+        assertThat(resource[1].success).isEqualTo(getForecastResponse())
     }
 
 
