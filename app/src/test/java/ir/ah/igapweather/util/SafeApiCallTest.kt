@@ -1,6 +1,6 @@
 package ir.ah.igapweather.util
 
-import FakeNetworkConnectionInterceptor
+import ir.ah.igapweather.FakeNetworkConnectionInterceptor
 import com.google.common.truth.Truth.assertThat
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
