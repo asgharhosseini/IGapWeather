@@ -22,7 +22,7 @@ class SplashFragment : BaseFragment<SplashViewModel>(
         lifecycleScope.launchWhenStarted {
             delay(2000)
 
-            //findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToCurrentWeatherFragment())
+            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToCurrentWeatherFragment())
 
 
         }

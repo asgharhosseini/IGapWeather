@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import ir.ah.igapweather.data.remote.ApiService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -16,12 +17,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RestClientModule {
 
-//    @Provides
-//    @Singleton
-//    internal fun provideApiService(
-//        @WeatherRetrofit retrofit: Retrofit
-//    ): ApiService = retrofit.create(ApiService::class.java)
-//
+    @Provides
+    @Singleton
+    internal fun provideApiService(
+        @WeatherRetrofit retrofit: Retrofit
+    ): ApiService = retrofit.create(ApiService::class.java)
+
 
 
 
