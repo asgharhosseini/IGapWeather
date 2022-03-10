@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">IGapWeather</string>
+    <string name="no_connection">No connection</string>
+    <string name="no_internet_description">Sorry, no connection was made between your device and the Bumgard.<br/> Try again</string>
+    <string name="try_again">Retry</string>
+    <string name="current_weather">Current Weather</string>
+    <string name="favorite">Favorite</string>
+    <string name="app_desc">Kianiranian Smart tech development group</string>
+    <string name="app_site">www.kianiranian.com</string>
+    <string name="your_place">Your place</string>
+    <string name="place_name_cannot_be_empty">"Place name cannot be empty" </string>
+    <string name="Location_name_not_found">"Location name not found" </string>
 </resources>
