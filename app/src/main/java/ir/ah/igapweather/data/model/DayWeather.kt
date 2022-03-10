@@ -38,7 +38,7 @@ data class DayWeather(
         return dt?.let { getDateTime(it)?.getDisplayName(TextStyle.FULL, Locale.getDefault()) }
     }
 
-    private fun getDateTime(s: Long): DayOfWeek? {
+    fun getDateTime(s: Long): DayOfWeek? {
         return try {
             val sdf = SimpleDateFormat("dd/MM/yyyy")
             val netDate = Date(s * 1000)
