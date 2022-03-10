@@ -6,12 +6,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.ah.igapweather.BuildConfig
 import ir.ah.igapweather.data.remote.ApiService
-//import ir.ah.igapweather.data.repository.NextWeather.NextWeatherRepository
-//import ir.ah.igapweather.data.repository.NextWeather.NextWeatherRepositoryImpl
+import ir.ah.igapweather.data.repository.NextWeather.NextWeatherRepository
+import ir.ah.igapweather.data.repository.NextWeather.NextWeatherRepositoryImpl
 import ir.ah.igapweather.data.repository.currentweather.CurrentWeatherRepository
 import ir.ah.igapweather.data.repository.currentweather.CurrentWeatherRepositoryImpl
-//import ir.ah.igapweather.data.repository.setting.SettingRepository
-//import ir.ah.igapweather.data.repository.setting.SettingRepositoryImpl
+
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -27,12 +26,12 @@ object RepositoryModule {
             apiService
         )
 
-//    @Provides
-//    @Singleton
-//    internal fun provideNextWeatherRepository(apiService: ApiService): NextWeatherRepository =
-//        if (BuildConfig.DEMO_MODE) NextWeatherRepositoryImpl(apiService) else NextWeatherRepositoryImpl(
-//            apiService
-//        )
+    @Provides
+    @Singleton
+    internal fun provideNextWeatherRepository(apiService: ApiService): NextWeatherRepository =
+        if (BuildConfig.DEMO_MODE) NextWeatherRepositoryImpl(apiService) else NextWeatherRepositoryImpl(
+            apiService
+        )
 
 
 }

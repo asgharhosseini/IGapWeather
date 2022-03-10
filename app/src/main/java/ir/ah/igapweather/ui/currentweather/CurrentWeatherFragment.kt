@@ -1,6 +1,7 @@
 package ir.ah.igapweather.ui.currentweather
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -131,7 +132,7 @@ class CurrentWeatherFragment : BaseFragment<CurrentWeatherViewModel>(
         binding.weatherView.text = weather.weather.get(0).main
         binding.weatherCardView.setCardBackgroundColor(weather.getColor())
         binding.weatherCardView.setOnClickListener {
-          //  findNavController().navigate(R.id.action_currentWeatherFragment_to_nextWeatherFragment)
+            findNavController().navigate(R.id.action_currentWeatherFragment_to_nextWeatherFragment)
         }
     }
 }

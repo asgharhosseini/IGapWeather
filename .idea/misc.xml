@@ -6,6 +6,7 @@
         <entry key="..\:/dev/StudioProjects/IGapWeather/app/src/main/res/drawable/background_color.xml" value="0.22962962962962963" />
         <entry key="..\:/dev/StudioProjects/IGapWeather/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/dev/StudioProjects/IGapWeather/app/src/main/res/layout/fragment_current_weather.xml" value="0.25" />
+        <entry key="..\:/dev/StudioProjects/IGapWeather/app/src/main/res/layout/fragment_next_weather.xml" value="0.25" />
         <entry key="..\:/dev/StudioProjects/IGapWeather/app/src/main/res/layout/fragment_splash.xml" value="0.25" />
         <entry key="..\:/dev/StudioProjects/IGapWeather/app/src/main/res/layout/item_current_forecast.xml" value="0.25" />
         <entry key="..\:/dev/StudioProjects/IGapWeather/app/src/main/res/layout/item_next_weather_forecast.xml" value="0.25" />
