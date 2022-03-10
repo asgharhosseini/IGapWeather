@@ -1,20 +1,16 @@
 package ir.ah.igapweather.ui.currentweather
 
-import ir.ah.igapweather.FakeNetworkConnectionInterceptor
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.squareup.moshi.Moshi
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import ir.ah.igapweather.R
+import ir.ah.igapweather.*
 import ir.ah.igapweather.data.model.*
-import ir.ah.igapweather.launchFragmentInHiltContainer
 import ir.ah.igapweather.other.wrapper.Resource
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.runBlocking
 import mockwebserver3.MockResponse
@@ -23,17 +19,27 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.pressBack
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 import javax.inject.Inject
+import ir.ah.igapweather.R
+import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
 class CurrentWeatherFragmentTest{
-    @get:Rule
+    @get:Rule()
     val hiltAndroidRule = HiltAndroidRule(this)
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
+
 
     @Inject
     lateinit var mockWebServer: MockWebServer
@@ -47,7 +53,7 @@ class CurrentWeatherFragmentTest{
     @Inject
     lateinit var mainCoroutineDispatcher: CoroutineDispatcher
 
-    private val feedApiResponseJsonAdapter get() = moshi.adapter(WeatherResponse::class.java)
+    private val ResponseJsonAdapter get() = moshi.adapter(WeatherResponse::class.java)
 
 
     @Before
@@ -66,7 +72,7 @@ class CurrentWeatherFragmentTest{
         mockWebServer.start(port = 57594)
         mockWebServer.enqueue(
             MockResponse().setResponseCode(200)
-                .setBody(feedApiResponseJsonAdapter.toJson(getWeatherResponse())))
+                .setBody(ResponseJsonAdapter.toJson(getWeatherResponse())))
     }
 
 
@@ -75,21 +81,63 @@ class CurrentWeatherFragmentTest{
         Resource.Success(getWeatherResponse())
 
     @Test
-    fun test1() {
+    fun testWeatherCardViewEqualResponseMain() {
         enqueueSuccessResponse()
         launchFragmentInHiltContainer<CurrentWeatherFragment>()
         onView(withText(getWeatherResponse().weather[0].main)).check(matches(isDisplayed()))
 
+
     }
+
     @Test
-    fun test2() {
+    fun testWeatherCardViewIsDisplayed() {
         enqueueSuccessResponse()
         launchFragmentInHiltContainer<CurrentWeatherFragment>()
         onView(withId(R.id.weatherCardView)).check(matches(isDisplayed()))
 
     }
+    @Test
+    fun testWeatherTempViewEqualResponse() {
+        enqueueSuccessResponse()
+        launchFragmentInHiltContainer<CurrentWeatherFragment>()
+        onView(withText(getWeatherResponse().main.temp.toString())).check(matches(isDisplayed()))
 
 
+    }
+
+    @Test
+    fun testWeatherTempViewIsDisplayed() {
+        enqueueSuccessResponse()
+        launchFragmentInHiltContainer<CurrentWeatherFragment>()
+        onView(withId(R.id.weatherTempView)).check(matches(isDisplayed()))
+
+
+    }
+
+
+    @Test
+    fun testWeatherImageViewViewIsDisplayed() {
+        enqueueSuccessResponse()
+        launchFragmentInHiltContainer<CurrentWeatherFragment>()
+        onView(withId(R.id.weatherImageView)).check(matches(isDisplayed()))
+
+
+    }
+
+    @Test
+    fun navigateBetweenCurrentWeatherFragmentAndNextWeatherFragmentAfterClick () {
+        val navController = mock(NavController::class.java)
+
+        launchFragmentInHiltContainer<CurrentWeatherFragment>() {
+            Navigation.setViewNavController(requireView(), navController)
+        }
+
+        onView(withId(R.id.weatherCardView)).perform(click())
+
+        verify(navController).navigate(
+            CurrentWeatherFragmentDirections.actionCurrentWeatherFragmentToNextWeatherFragment()
+        )
+    }
 
 
 
