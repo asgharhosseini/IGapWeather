@@ -14,7 +14,7 @@
             android:id="@+id/action_splashFragment_to_currentWeatherFragment"
             app:destination="@id/currentWeatherFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            appexitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
@@ -25,5 +25,18 @@
         android:id="@+id/currentWeatherFragment"
         tools:layout="@layout/fragment_current_weather"
         android:name="ir.ah.igapweather.ui.currentweather.CurrentWeatherFragment"
-        android:label="CurrentWeatherFragment" />
+        android:label="CurrentWeatherFragment" >
+        <action
+            android:id="@+id/action_currentWeatherFragment_to_nextWeatherFragment"
+            app:destination="@id/nextWeatherFragment"
+            app:enterAnim="@anim/slide_in_right"
+            appexitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/nextWeatherFragment"
+        tools:layout="@layout/fragment_next_weather"
+        android:name="ir.ah.igapweather.ui.nextweather.NextWeatherFragment"
+        android:label="NextWeatherFragment" />
 </navigation>
