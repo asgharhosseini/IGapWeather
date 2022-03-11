@@ -5,6 +5,7 @@ import dagger.hilt.*
 import dagger.hilt.android.components.*
 import ir.ah.igapweather.ui.currentweather.adapter.CurrentForecastAdapter
 import ir.ah.igapweather.ui.currentweather.adapter.NextWeatherForecastAdapter
+import ir.ah.igapweather.ui.nextweather.adapter.NextWeatherAdapter
 
 
 @Module
@@ -18,5 +19,8 @@ object AdapterModule {
 
     @Provides
     fun provideNextWeatherForecastAdapter(glide: RequestManager) = NextWeatherForecastAdapter(glide)
+
+    @Provides
+    fun provideNextWeatherAdapter(glide: RequestManager) = NextWeatherAdapter(glide)
 
 }

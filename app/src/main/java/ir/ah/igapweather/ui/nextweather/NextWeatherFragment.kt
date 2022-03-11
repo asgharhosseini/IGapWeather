@@ -1,5 +1,6 @@
 package ir.ah.igapweather.ui.nextweather
 import android.util.Log
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import ir.ah.igapweather.other.viewBinding
 import ir.ah.igapweather.other.wrapper.Resource
 import ir.ah.igapweather.ui.currentweather.adapter.CurrentForecastAdapter
 import ir.ah.igapweather.ui.currentweather.adapter.NextWeatherForecastAdapter
+import ir.ah.igapweather.ui.nextweather.adapter.NextWeatherAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -27,7 +29,7 @@ class NextWeatherFragment : BaseFragment<NextWeatherViewModel>(
     private val binding by viewBinding(FragmentNextWeatherBinding::bind)
 
     @Inject
-    lateinit var nextWeatherForecastAdapter: NextWeatherForecastAdapter
+    lateinit var nextWeatherAdapter: NextWeatherAdapter
 
 
 
@@ -45,7 +47,7 @@ class NextWeatherFragment : BaseFragment<NextWeatherViewModel>(
     private fun setUpAdapter() {
 
         binding.nextWeatherForecastRecyclerView.apply {
-            adapter = nextWeatherForecastAdapter
+            adapter = nextWeatherAdapter
             layoutManager =
                 GridLayoutManager(requireContext(),3)
         }
@@ -65,14 +67,17 @@ class NextWeatherFragment : BaseFragment<NextWeatherViewModel>(
                 handleResource(event) { vm.getNextWeather() }
                 when (event) {
                     is Resource.Loading -> {
+                        binding.loadingView.isVisible=true
+
                     }
                     is Resource.Success -> {
                         Log.e("sdasdasd", event.success.dayWeather?.size.toString())
                         event.success.dayWeather?.let {
                             Log.e("sdasdasd", forecastMapper.mapFrom(it).size.toString())
-                            nextWeatherForecastAdapter.submitList(forecastMapper.mapFrom(it))
+                            nextWeatherAdapter.submitList(forecastMapper.mapFrom(it))
 
                         }
+                        binding.loadingView.isVisible=false
 
 
 

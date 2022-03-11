@@ -1,5 +1,6 @@
 package ir.ah.igapweather.ui.currentweather
 import android.util.Log
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,6 +55,7 @@ class CurrentWeatherFragment : BaseFragment<CurrentWeatherViewModel>(
             adapter = nextWeatherForecastAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
         }
     }
 
@@ -72,6 +74,7 @@ class CurrentWeatherFragment : BaseFragment<CurrentWeatherViewModel>(
                 handleResource(event) { vm.getCurrentWeather() }
                 when (event) {
                     is Resource.Loading -> {
+                        binding.loadingView.isVisible=true
                     }
                     is Resource.Success -> {
                         initUIItem(event.success)
@@ -104,6 +107,7 @@ class CurrentWeatherFragment : BaseFragment<CurrentWeatherViewModel>(
                 handleResource(event) { vm.getNextWeather() }
                 when (event) {
                     is Resource.Loading -> {
+                        binding.loadingView.isVisible=true
                     }
                     is Resource.Success -> {
                         Log.e("sdasdasd", event.success.dayWeather?.size.toString())
@@ -112,6 +116,7 @@ class CurrentWeatherFragment : BaseFragment<CurrentWeatherViewModel>(
                             nextWeatherForecastAdapter.submitList(forecastMapper.mapFrom(it))
 
                         }
+                        binding.loadingView.isVisible=false
 
 
 
@@ -134,5 +139,7 @@ class CurrentWeatherFragment : BaseFragment<CurrentWeatherViewModel>(
         binding.weatherCardView.setOnClickListener {
             findNavController().navigate(R.id.action_currentWeatherFragment_to_nextWeatherFragment)
         }
+        binding.loadingView.isVisible=false
+
     }
 }
