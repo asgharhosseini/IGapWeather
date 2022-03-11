@@ -8,7 +8,10 @@ import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.Response
 
-
+/**
+ * Receives the server response as the input parameter and returns the response if the body is correct,
+ * otherwise returns the appropriate error according to the error code
+ */
 suspend inline fun <T : Any> safeApiCall(
     ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     crossinline api: suspend () -> Response<T>

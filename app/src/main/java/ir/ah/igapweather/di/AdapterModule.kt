@@ -6,7 +6,9 @@ import dagger.hilt.android.components.*
 import ir.ah.igapweather.ui.currentweather.adapter.CurrentForecastAdapter
 import ir.ah.igapweather.ui.currentweather.adapter.NextWeatherForecastAdapter
 
-
+/**
+ * Made to provide adapter classes according to the fragment being injected
+ */
 @Module
 @InstallIn(FragmentComponent::class)
 object AdapterModule {

@@ -15,7 +15,12 @@ import ir.ah.igapweather.databinding.NoInternetLayoutBinding
 import ir.ah.igapweather.other.wrapper.ApiCallFailure
 import ir.ah.igapweather.other.wrapper.Resource
 
-
+/**
+ * @description
+ * This class is used as a parent class for fragments,
+ * resource view and view model taken from the child class Resource is
+ * used to create view class and view model to create child class view model
+ */
 import kotlin.reflect.KClass
 
 abstract class BaseFragment<viewModel : BaseViewModel>(
@@ -66,6 +71,11 @@ abstract class BaseFragment<viewModel : BaseViewModel>(
         observeData()
     }
 
+    /**
+    setUpViews and observeData are no different
+    just for separating the views and data found from the
+    lower layer, and both are optionally overwrite in the child
+    and are called in onViewCreated     */
     open fun setUpViews() {}
     open fun observeData() {}
 
@@ -99,6 +109,9 @@ abstract class BaseFragment<viewModel : BaseViewModel>(
         }
     }
 
+    /**
+     * for showNoInternetLayout
+     */
     private fun showNoInternetLayout(retry: (() -> Unit)) {
         if (!isNoInternetLayoutShowing)
             viewGroup?.let { viewGroup ->
@@ -108,6 +121,10 @@ abstract class BaseFragment<viewModel : BaseViewModel>(
             }
     }
 
+
+    /**
+     * for hideNoInternetLayout
+     */
     private fun hideNoInternetLayout() {
         if (isNoInternetLayoutShowing)
             viewGroup?.let { viewGroup ->

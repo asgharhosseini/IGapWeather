@@ -38,14 +38,22 @@ data class WeatherResponse(
   @Json(name ="wind")
     val wind: Wind
 ){
+  /**
+   * To get the first item from the weather list
+   */
   fun getWeatherItem(): Weather? {
     return weather?.first()
   }
-
+  /**
+   * Used to get the name of the day, receives the date value and gives the name of the day
+   */
   fun getDay(): String? {
     return dt?.let { getDateTime(it)?.getDisplayName(TextStyle.FULL, Locale.getDefault()) }
   }
 
+  /**
+   * Used to get the name of the day, receives the date value and gives the name of the day
+   */
   private fun getDateTime(s: Long): DayOfWeek? {
     return try {
       val sdf = SimpleDateFormat("dd/MM/yyyy")
@@ -63,7 +71,9 @@ data class WeatherResponse(
       DayOfWeek.MONDAY
     }
   }
-
+  /**
+   *Gives us a color for each day of the week
+   */
   fun getColor(): Int {
     return when (dt?.let {
       getDateTime(it)

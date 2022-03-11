@@ -3,6 +3,10 @@ package ir.ah.igapweather.other.wrapper
 
 sealed interface FailureInterface
 
+/**
+ * Used to implement a variety of errors
+ */
+
 sealed class ApiCallFailure(
     open val errorMessage: String? = null,
     open val error: Exception? = null

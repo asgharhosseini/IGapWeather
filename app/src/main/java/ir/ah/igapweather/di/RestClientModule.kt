@@ -13,6 +13,9 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
+/**
+ * Used to provide RestClient related classes
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object RestClientModule {

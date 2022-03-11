@@ -5,7 +5,17 @@ import ir.ah.igapweather.di.EndPoint
 import retrofit2.Response
 import retrofit2.http.*
 
+
+/**
+ *ApiService is an interface for receiving information from the server
+ *
+ */
+
+
 interface ApiService {
+    /**
+     * for CheckValidLocalName
+     */
 
     @GET(EndPoint.getCheckValidLocalName)
     suspend fun getCheckValidLocalName(
@@ -19,6 +29,9 @@ interface ApiService {
         units: String = EndPoint.units
     ): Response<WeatherResponse>
 
+    /**
+     * for get Current Weather
+     */
     @GET(EndPoint.getCurrentWeather)
     suspend fun getCurrentWeather(
         @Query("q")
@@ -31,7 +44,9 @@ interface ApiService {
         units: String = EndPoint.units
     ): Response<WeatherResponse>
 
-
+    /**
+     * for get Forecast Weather
+     */
     @GET(EndPoint.getForecastWeather)
     suspend fun getForecastWeather(
         @Query("q")
@@ -46,6 +61,9 @@ interface ApiService {
         cnt: Int = EndPoint.cnt
     ): Response<ForecastResponse>
 
+    /**
+     * for get Next Weather
+     */
     @GET(EndPoint.getForecastWeather)
     suspend fun getNextWeather(
         @Query("q")

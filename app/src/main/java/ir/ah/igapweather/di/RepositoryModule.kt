@@ -6,8 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.ah.igapweather.BuildConfig
 import ir.ah.igapweather.data.remote.ApiService
-import ir.ah.igapweather.data.repository.NextWeather.NextWeatherRepository
-import ir.ah.igapweather.data.repository.NextWeather.NextWeatherRepositoryImpl
+import ir.ah.igapweather.data.repository.nextWeather.NextWeatherRepository
+import ir.ah.igapweather.data.repository.nextWeather.NextWeatherRepositoryImpl
 import ir.ah.igapweather.data.repository.currentweather.CurrentWeatherRepository
 import ir.ah.igapweather.data.repository.currentweather.CurrentWeatherRepositoryImpl
 

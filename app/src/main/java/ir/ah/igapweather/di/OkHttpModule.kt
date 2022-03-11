@@ -6,6 +6,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+
+/**
+ * Used to provide client's using OkHttpClient
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object OkHttpModule {

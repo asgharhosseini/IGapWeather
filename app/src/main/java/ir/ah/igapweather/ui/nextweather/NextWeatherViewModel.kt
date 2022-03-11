@@ -2,7 +2,7 @@ package ir.ah.igapweather.ui.nextweather
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.ah.igapweather.base.BaseViewModel
 import ir.ah.igapweather.data.model.ForecastResponse
-import ir.ah.igapweather.data.repository.NextWeather.NextWeatherRepository
+import ir.ah.igapweather.data.repository.nextWeather.NextWeatherRepository
 import ir.ah.igapweather.other.wrapper.Resource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.Channel

@@ -1,7 +1,6 @@
-package ir.ah.igapweather.data.repository.NextWeather
+package ir.ah.igapweather.data.repository.nextWeather
 
 import ir.ah.igapweather.data.model.ForecastResponse
-import ir.ah.igapweather.data.model.WeatherResponse
 import ir.ah.igapweather.other.wrapper.Resource
 
 

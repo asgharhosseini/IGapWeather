@@ -12,6 +12,9 @@ import dagger.hilt.components.*
 
 import javax.inject.*
 
+/**
+ * Used to provide classes with general uses
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {

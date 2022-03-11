@@ -3,7 +3,7 @@ import ir.ah.igapweather.data.model.DayWeather
 import javax.inject.Inject
 
 /**
- * Created by Furkan on 2019-10-26
+ * Used to convert general weather forecast list to daily forecast
  */
 
 class ForecastMapper @Inject constructor() : Mapper<List<DayWeather>, List<DayWeather>> {

@@ -30,14 +30,22 @@ data class DayWeather(
     @Json(name = "wind")
     val wind: Wind
 ){
+    /**
+     * To get the first item from the weather list
+     */
     fun getWeatherItem(): Weather? {
         return weather?.first()
     }
 
+    /**
+     * Used to get the name of the day, receives the date value and gives the name of the day
+     */
     fun getDay(): String? {
         return dt?.let { getDateTime(it)?.getDisplayName(TextStyle.FULL, Locale.getDefault()) }
     }
-
+    /**
+     * Used to get the name of the day, receives the date value and gives the name of the day
+     */
     private fun getDateTime(s: Long): DayOfWeek? {
         return try {
             val sdf = SimpleDateFormat("dd/MM/yyyy")
@@ -56,6 +64,10 @@ data class DayWeather(
         }
     }
 
+    /**
+     *Gives us a color for each day of the week
+     */
+
     fun getColor(): Int {
         return when (dt?.let {
             getDateTime(it)
@@ -71,6 +83,9 @@ data class DayWeather(
         }
     }
 
+    /**
+     * Gives us a color for every hour of the day
+     */
     fun getHourColor(): Int {
         return when (dtTxt?.substringAfter(" ")?.substringBeforeLast(":")) {
             "00:00" -> Color.parseColor("#28E0AE")
@@ -85,6 +100,9 @@ data class DayWeather(
         }
     }
 
+    /**
+     * Extracts the value of the clock from the format found in the time and date
+     */
     fun getHourOfDay(): String {
         return dtTxt?.substringAfter(" ")?.substringBeforeLast(":") ?: "00:00"
     }
