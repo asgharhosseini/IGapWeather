@@ -19,5 +19,9 @@ class CurrentWeatherRepositoryImpl @Inject constructor(private val apiService: A
         return safeApiCall { apiService.getNextWeather(localName) }
     }
 
+    override suspend fun getSearchCurrentWeather(localName: String): Resource<WeatherResponse> {
+        return safeApiCall { apiService.getSearchCurrentWeather(localName) }
+    }
+
 
 }

@@ -58,4 +58,16 @@ interface ApiService {
         units: String = EndPoint.units,
     ): Response<ForecastResponse>
 
+    @GET(EndPoint.getCurrentWeather)
+    suspend fun getSearchCurrentWeather(
+        @Query("q")
+        localName: String,
+        @Query("appid")
+        apiKey: String = EndPoint.apiKey,
+        @Query("lang")
+        lang: String = EndPoint.lang,
+        @Query("units")
+        units: String = EndPoint.units
+    ): Response<WeatherResponse>
+
 }

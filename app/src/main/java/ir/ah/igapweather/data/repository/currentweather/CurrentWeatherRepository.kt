@@ -17,4 +17,9 @@ interface CurrentWeatherRepository {
     suspend fun getNextWeather(
         localName: String = "tehran",
     ): Resource<ForecastResponse>
+
+    suspend fun getSearchCurrentWeather(
+        localName: String ,
+    ): Resource<WeatherResponse>
+
 }

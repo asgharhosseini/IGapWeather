@@ -9,6 +9,7 @@ import ir.ah.igapweather.data.repository.currentweather.CurrentWeatherRepository
 import ir.ah.igapweather.other.wrapper.Resource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
@@ -17,6 +18,7 @@ class CurrentWeatherViewModel @Inject constructor(
     private val mainCoroutineDispatcher: CoroutineDispatcher,
     private val repository: CurrentWeatherRepository
 ) : BaseViewModel(mainCoroutineDispatcher) {
+    val searchQuery: MutableStateFlow<String> = MutableStateFlow("tehran")
 
     private val currentWeatherChanel = Channel<Resource<WeatherResponse>>()
     val currentWeather = currentWeatherChanel.receiveAsFlow()
@@ -24,29 +26,52 @@ class CurrentWeatherViewModel @Inject constructor(
     val currentForecast = currentForecastChanel.receiveAsFlow()
     private val nextWeatherForecastChanel = Channel<Resource<ForecastResponse>>()
     val nextWeatherForecast = nextWeatherForecastChanel.receiveAsFlow()
+    private val searchEventChanel = Channel<SearchWeatherEvent>()
+    private val searchWeatherForecastChanel = Channel<Resource<ForecastResponse>>()
+    val searchWeatherForecast = searchWeatherForecastChanel.receiveAsFlow()
 
+    fun validateSearchQuery() {
+
+        val searchQuery = searchQuery.value
+        doInMain {
+            if (searchQuery.isEmpty()) {
+                searchEventChanel.send(SearchWeatherEvent.SearchQueryIsEmpty)
+                return@doInMain
+            }
+
+            getSearchCurrentWeather()
+
+            return@doInMain
+        }
+    }
 
     fun getCurrentWeather() = doInMain {
         currentWeatherChanel.send(Resource.Loading)
         currentWeatherChanel.send(
-            repository.getCurrentWeather()
+            repository.getCurrentWeather(searchQuery.value)
         )
     }
 
     fun getForecastWeather() = doInMain {
         currentForecastChanel.send(Resource.Loading)
         currentForecastChanel.send(
-            repository.getForecastWeather()
+            repository.getForecastWeather(searchQuery.value)
         )
     }
 
     fun getNextWeather() = doInMain {
         nextWeatherForecastChanel.send(Resource.Loading)
         nextWeatherForecastChanel.send(
-            repository.getNextWeather()
+            repository.getNextWeather(searchQuery.value)
         )
 
     }
 
+    private fun getSearchCurrentWeather() = doInMain {
+        currentWeatherChanel.send(Resource.Loading)
+        currentWeatherChanel.send(
+            repository.getSearchCurrentWeather(searchQuery.value)
+        )
+    }
 
 }
